@@ -3,10 +3,14 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 LDFLAGS = -lncurses
 
-# Default target
-all:
-	@echo "Usage: make <filename (without .cpp)>"
-	@echo "Example: make code"
+# Target for building everything together
+APP = game
+SRCS = main.cpp Maze/maze.cpp Player/player.cpp Scoreboard/score.cpp
+
+$(APP): $(SRCS)
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $(APP) $(LDFLAGS)
+	@echo "---------- RUNNING $(APP) ----------"
+	./$(APP)
 
 # Pattern rule: make <filename>
 %: %.cpp
@@ -14,6 +18,14 @@ all:
 	@echo "---------- RUNNING $@ ----------"
 	./$@
 
-# Optional clean rule
+# Default help target
+all:
+	@echo "Usage:"
+	@echo "  make <file>     - Compile single file"
+	@echo "  make game       - Compile full project with all modules"
+	@echo "  make clean      - Clean up build files"
+
+# Clean rule
 clean:
-	rm -f *.o *.out *.exe *.gch code
+	rm -f *.o *.out *.exe *.gch game
+
