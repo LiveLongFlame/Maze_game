@@ -1,0 +1,3 @@
+/*  
+	Purpose: Score method file 
+ */

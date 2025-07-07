@@ -1,0 +1,3 @@
+/*  
+	Purpose: Score object file 
+ */

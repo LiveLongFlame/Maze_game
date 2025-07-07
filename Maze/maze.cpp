@@ -1,0 +1,3 @@
+/* 
+	Purpose: Maze method file
+*/

@@ -1,0 +1,4 @@
+/* 
+	Purpose: Maze object file 
+ */
+
