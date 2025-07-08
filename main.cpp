@@ -8,7 +8,45 @@
 #include "Scoreboard/score.h"
 #include "Player/player.h"
 
+void drawSquare(int width, int height) {
+    if (width < 2 || height < 2) {
+        std::cout << "Width and height must be at least 2.\n";
+        return;
+    }
+
+    // Unicode chars for corners and edges
+    const char* tl = "\u231C"; // ⌜
+    const char* tr = "\u231D"; // ⌝
+    const char* bl = "\u231E"; // ⌞
+    const char* br = "\u231F"; // ⌟
+    const char* h  = "\u2500"; // ─
+    const char* v  = "\u2502"; // │
+
+    // Top row
+    std::cout << tl;
+    for (int i = 0; i < width - 2; i++) std::cout << h;
+    std::cout << tr << "\n";
+
+    // Middle rows
+    for (int j = 0; j < height - 2; j++) {
+        std::cout << v;
+        for (int i = 0; i < width - 2; i++) std::cout << " ";
+        std::cout << v << "\n";
+    }
+
+    // Bottom row
+    std::cout << bl;
+    for (int i = 0; i < width - 2; i++) std::cout << h;
+    std::cout << br << "\n";
+}
+
+
 using namespace std;
+enum maze_info{
+	WIDTH = 150,
+	HEIGHT = 30
+};
+
 
 int main() {
     initscr();             
@@ -26,7 +64,7 @@ int main() {
     int start_row = row / 2 - 1;
     int start_col = (col - 20) / 2;
 
-    mvprintw(start_row, start_col, "Player Name:");
+    mvprintw(start_row, start_col + 5, "Player Name:");
     mvprintw(start_row + 1, start_col, "[                    ]"); // 20 spaces
 
     move(start_row + 1, start_col + 1); // Move cursor inside the brackets
@@ -51,9 +89,12 @@ int main() {
     clear();
     Player player(name);
     player.setName(name);
-
-    mvprintw(row / 2, (col - name.length() - 10) / 2, "Welcome %s!", player.getName().c_str());
+    clear();
+    mvprintw((row / 2) -20, (col - name.length() - 10) / 2, "Welcome %s!", player.getName().c_str());
     refresh();
+	//todo: Print the maze and genereate maze(width ,height)
+	Maze maze(WIDTH , HEIGHT);
+	maze.print_maze();
     getch();
     endwin();
 
