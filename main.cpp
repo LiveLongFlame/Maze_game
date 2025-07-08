@@ -8,39 +8,6 @@
 #include "Scoreboard/score.h"
 #include "Player/player.h"
 
-void drawSquare(int width, int height) {
-    if (width < 2 || height < 2) {
-        std::cout << "Width and height must be at least 2.\n";
-        return;
-    }
-
-    // Unicode chars for corners and edges
-    const char* tl = "\u231C"; // ⌜
-    const char* tr = "\u231D"; // ⌝
-    const char* bl = "\u231E"; // ⌞
-    const char* br = "\u231F"; // ⌟
-    const char* h  = "\u2500"; // ─
-    const char* v  = "\u2502"; // │
-
-    // Top row
-    std::cout << tl;
-    for (int i = 0; i < width - 2; i++) std::cout << h;
-    std::cout << tr << "\n";
-
-    // Middle rows
-    for (int j = 0; j < height - 2; j++) {
-        std::cout << v;
-        for (int i = 0; i < width - 2; i++) std::cout << " ";
-        std::cout << v << "\n";
-    }
-
-    // Bottom row
-    std::cout << bl;
-    for (int i = 0; i < width - 2; i++) std::cout << h;
-    std::cout << br << "\n";
-}
-
-
 using namespace std;
 enum maze_info{
 	WIDTH = 150,
