@@ -89,7 +89,7 @@ vector<vector<char>> Maze::generate_maze(int width, int height){
 
 //This methods prints the maze
 void Maze::print_maze() {
-    int term_rows, term_cols;
+	int term_rows, term_cols;
     getmaxyx(stdscr, term_rows, term_cols); // Terminal height and width
 
     int start_y = (term_rows - height) / 2;
@@ -97,10 +97,27 @@ void Maze::print_maze() {
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
+            char ch = maze_desgin[i][j];
+
+            if (ch == '#') {
+                // Detect surroundings to pick the right wall character
+                bool up    = (i > 0 && maze_desgin[i - 1][j] == '#');
+                bool down  = (i < height - 1 && maze_desgin[i + 1][j] == '#');
+                bool left  = (j > 0 && maze_desgin[i][j - 1] == '#');
+                bool right = (j < width - 1 && maze_desgin[i][j + 1] == '#');
+
+                if ((left || right) && !(up || down))
+                    ch = '-'; // horizontal wall
+                else if ((up || down) && !(left || right))
+                    ch = '|'; // vertical wall
+                else
+                    ch = '+'; // corner or junction
+            }
+
             // Only draw within terminal bounds
             if (start_y + i >= 0 && start_y + i < term_rows &&
                 start_x + j >= 0 && start_x + j < term_cols) {
-                mvaddch(start_y + i, start_x + j, maze_desgin[i][j]);
+                mvaddch(start_y + i, start_x + j, ch);
             }
         }
     }
