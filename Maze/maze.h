@@ -22,6 +22,8 @@ public:
 
 	//genrates the Maze with start and end points
 	vector<vector<char>> generate_maze(int width, int height);
+	//helper funciton
+	void carve_passages_from(int x, int y);
 
 	//Prints maze onto cli
 	void print_maze();
