@@ -33,6 +33,7 @@ void Player::start_postion(){
 	if (y == 0 && y + 1 < maze_height && maze_desgin[y + 1][x] == ' ') {
 		maze_desgin[y + 1][x] = 'v'; // Entering from top
 	}
+
 	else if (y == maze_height - 1 && y - 1 >= 0 && maze_desgin[y - 1][x] == ' ') {
 		maze_desgin[y - 1][x] = '^'; // Entering from bottom
 	}

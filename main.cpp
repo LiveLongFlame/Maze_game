@@ -21,6 +21,12 @@ int main() {
     noecho();              
     keypad(stdscr, TRUE);  
     curs_set(1);           // Show the cursor
+	//Adding colours
+	start_color();
+	use_default_colors();
+	init_pair(1, COLOR_BLUE, -1);    // Blue text, default background
+	init_pair(2, COLOR_RED, -1);     // Red text
+	init_pair(3, COLOR_YELLOW, -1);  // Orange-like (yellow)	
 
     int row, col;
     getmaxyx(stdscr, row, col); // Get terminal size

@@ -102,27 +102,45 @@ void Maze::print_maze() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             char ch = maze_desgin[i][j];
+			// Detect wall style
+			if (ch == '#') {
+				bool up    = (i > 0 && maze_desgin[i - 1][j] == '#');
+				bool down  = (i < height - 1 && maze_desgin[i + 1][j] == '#');
+				bool left  = (j > 0 && maze_desgin[i][j - 1] == '#');
+				bool right = (j < width - 1 && maze_desgin[i][j + 1] == '#');
 
-            if (ch == '#') {
-                // Detect surroundings to pick the right wall character
-                bool up    = (i > 0 && maze_desgin[i - 1][j] == '#');
-                bool down  = (i < height - 1 && maze_desgin[i + 1][j] == '#');
-                bool left  = (j > 0 && maze_desgin[i][j - 1] == '#');
-                bool right = (j < width - 1 && maze_desgin[i][j + 1] == '#');
+				if ((left || right) && !(up || down))
+					ch = '-';
+				else if ((up || down) && !(left || right))
+					ch = '|';
+				else
+					ch = '+';
+			}
 
-                if ((left || right) && !(up || down))
-                    ch = '-'; // horizontal wall
-                else if ((up || down) && !(left || right))
-                    ch = '|'; // vertical wall
-                else
-                    ch = '+'; // corner or junction
-            }
+			// Only draw within terminal bounds
+			if (start_y + i >= 0 && start_y + i < term_rows &&
+					start_x + j >= 0 && start_x + j < term_cols) {
 
-            // Only draw within terminal bounds
-            if (start_y + i >= 0 && start_y + i < term_rows &&
-                start_x + j >= 0 && start_x + j < term_cols) {
-                mvaddch(start_y + i, start_x + j, ch);
-            }
+				// Apply colors
+				if (ch == '>' || ch == '<' || ch == '^' || ch == 'v') {
+					attron(COLOR_PAIR(1));
+					mvaddch(start_y + i, start_x + j, ch);
+					attroff(COLOR_PAIR(1));
+				}
+				else if (ch == 'E') {
+					attron(COLOR_PAIR(2));
+					mvaddch(start_y + i, start_x + j, ch);
+					attroff(COLOR_PAIR(2));
+				}
+				else if (ch == 'S') {
+					attron(COLOR_PAIR(3));
+					mvaddch(start_y + i, start_x + j, ch);
+					attroff(COLOR_PAIR(3));
+				}
+				else {
+					mvaddch(start_y + i, start_x + j, ch);
+				}	
+			} 
         }
     }
 }
