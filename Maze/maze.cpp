@@ -16,6 +16,9 @@ Maze::Maze(int w, int  h){
 
 vector<vector<char>> Maze::generate_maze(int width, int height){
 	//todo: generetes maze and puts it into vector
+	//Idea: We will have a random start point in the maze
+	//Idea: Given the starting node we will go in a random direction UP,DOWN,LEFT,RIGHT and add to visted path 
+	//once we hit a wall we back track and find another path untill all nodes have been visited
 	//Define size of maze 
 	maze_desgin.resize(height);
 	for(int i =0;i < height;i++){

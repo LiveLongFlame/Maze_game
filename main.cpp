@@ -10,8 +10,8 @@
 
 using namespace std;
 enum maze_info{
-	WIDTH = 150,
-	HEIGHT = 30
+	WIDTH = 30,
+	HEIGHT = 5
 };
 
 
@@ -59,8 +59,8 @@ int main() {
     clear();
     mvprintw((row / 2) -20, (col - name.length() - 10) / 2, "Welcome %s!", player.getName().c_str());
     refresh();
-	//todo: Print the maze and genereate maze(width ,height)
-	Maze maze(WIDTH , HEIGHT);
+	
+	Maze maze(start_col + WIDTH , start_row + HEIGHT);
 	maze.print_maze();
     getch();
     endwin();
