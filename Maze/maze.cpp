@@ -109,12 +109,12 @@ void Maze::print_maze() {
 				bool left  = (j > 0 && maze_desgin[i][j - 1] == '#');
 				bool right = (j < width - 1 && maze_desgin[i][j + 1] == '#');
 
-				if ((left || right) && !(up || down))
-					ch = '-';
-				else if ((up || down) && !(left || right))
-					ch = '|';
-				else
-					ch = '+';
+				// if ((left || right) && !(up || down))
+				// 	ch = '-';
+				// else if ((up || down) && !(left || right))
+				// 	ch = '|';
+				// else
+				// 	ch = '+';
 			}
 
 			// Only draw within terminal bounds

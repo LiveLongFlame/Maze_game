@@ -32,25 +32,65 @@ void Player::start_postion(){
 
 	if (y == 0 && y + 1 < maze_height && maze_desgin[y + 1][x] == ' ') {
 		maze_desgin[y + 1][x] = 'v'; // Entering from top
+		py = y +1; 
+		px = x;
 	}
 
 	else if (y == maze_height - 1 && y - 1 >= 0 && maze_desgin[y - 1][x] == ' ') {
 		maze_desgin[y - 1][x] = '^'; // Entering from bottom
-	}
-	else if (x == 0 && x + 1 < maze_width && maze_desgin[y][x + 1] == ' ') {
+		py = y - 1; 
+		px = x;
+	}else if (x == 0 && x + 1 < maze_width && maze_desgin[y][x + 1] == ' ') {
 		maze_desgin[y][x + 1] = '>'; // Entering from left
+		py = y;
+		px = x +1;
 	}
 	else if (x == maze_width - 1 && x - 1 >= 0 && maze_desgin[y][x - 1] == ' ') {
 		maze_desgin[y][x - 1] = '<'; // Entering from right
+		py = y; 
+		px = x -1;
 	}	
 }
-void Player::move_up(){
-}
-void Player::move_down(){
-}
-void Player::move_left(){
-}
-void Player::move_right(){
+void Player::move_up() {
+    int new_y = py - 1;
+    int new_x = px;
+    if (new_y >= 0 && maze_desgin[new_y][new_x] != '#') {
+        maze_desgin[py][px] = '*';  // Clear old position
+        maze_desgin[new_y][new_x] = '^'; // Player facing up
+        py = new_y;
+        px = new_x;
+    }
 }
 
+void Player::move_down() {
+    int new_y = py + 1;
+    int new_x = px;
+    if (new_y < (int)maze_desgin.size() && maze_desgin[new_y][new_x] != '#') {
+        maze_desgin[py][px] = '*';  // Clear old position
+        maze_desgin[new_y][new_x] = 'v'; // Player facing down
+        py = new_y;
+        px = new_x;
+    }
+}
 
+void Player::move_left() {
+    int new_y = py;
+    int new_x = px - 1;
+    if (new_x >= 0 && maze_desgin[new_y][new_x] != '#') {
+        maze_desgin[py][px] = '*';  // Clear old position
+        maze_desgin[new_y][new_x] = '<'; // Player facing left
+        py = new_y;
+        px = new_x;
+    }
+}
+
+void Player::move_right() {
+    int new_y = py;
+    int new_x = px + 1;
+    if (new_x < (int)maze_desgin[0].size() && maze_desgin[new_y][new_x] != '#') {
+        maze_desgin[py][px] = '*';  // Clear old position
+        maze_desgin[new_y][new_x] = '>'; // Player facing right
+        py = new_y;
+        px = new_x;
+    }
+}
