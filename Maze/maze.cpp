@@ -81,8 +81,12 @@ vector<vector<char>> Maze::generate_maze(int width, int height){
     auto [sx, sy] = edge_cells[si];
     auto [ex, ey] = edge_cells[ei];
 
-    maze_desgin[sy][sx] = 'S';
+    maze_desgin[sy][sx] = 'S'; 
+	start_point[0] = sy;
+	start_point[1] = sx;
     maze_desgin[ey][ex] = 'E';
+	end_point[0] = ey;
+	end_point[1] = ex;
 
     return maze_desgin;
 }

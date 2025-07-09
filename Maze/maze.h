@@ -15,8 +15,11 @@ class Maze{
 private:
 	int width =0, height =0;
 	string algo = ""; 
-	vector<vector<char>> maze_desgin;
 
+protected:
+	int start_point[2];
+	int end_point[2];
+	vector<vector<char>> maze_desgin;
 public:
 	Maze(int width, int height); 
 

@@ -10,15 +10,17 @@
 	-path
 	-Name 
  */
+#include "../Maze/maze.h"
 #include <string>
 #include <vector>
 using namespace std;
-class Player{
+class Player: public Maze{
 private:
 	string name;
+	int width =0, height =0;
 public:
 		//Constructers
-		Player(const string name);
+		Player(const string& name , int width, int height);
 
 		//setters 
 		void setName(const string name);
@@ -27,7 +29,11 @@ public:
 		string getName();
 		
 		//game logic functions
-		void move_set();
+		void start_postion();
+		void move_up();
+		void move_down();
+		void move_left();
+		void move_right();
 
 
 

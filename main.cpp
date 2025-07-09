@@ -54,7 +54,7 @@ int main() {
     }
 
     clear();
-    Player player(name);
+    Player player(name, start_col + WIDTH , start_row + HEIGHT);
     player.setName(name);
     clear();
 	std::string welcomeMsg = "Welcome " + player.getName() + "!";
@@ -65,8 +65,7 @@ int main() {
 	// Print the message
 	mvprintw(msg_row, msg_col, "%s", welcomeMsg.c_str()); 
 	
-	Maze maze(start_col + WIDTH , start_row + HEIGHT);
-	maze.print_maze();
+	player.print_maze();
     getch();
     endwin();
 
