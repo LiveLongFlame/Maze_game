@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-Player::Player(const string& name, int w, int h):Maze(w, h){
+Player::Player(const string& name, int w, int h , int points, int moves):Maze(w, h),Score(points, moves){
 	this-> name = name;
 	start_postion();
 }
@@ -54,43 +54,63 @@ void Player::start_postion(){
 void Player::move_up() {
     int new_y = py - 1;
     int new_x = px;
-    if (new_y >= 0 && maze_desgin[new_y][new_x] != '#') {
+    if (new_y >= 0 && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '^'; // Player facing up
         py = new_y;
         px = new_x;
+
+	//add to moves taken and points
+	//todo: Check if the path is a visitied path then add points + 2
+	addMove();
+	addPoint();
+
     }
 }
 
 void Player::move_down() {
     int new_y = py + 1;
     int new_x = px;
-    if (new_y < (int)maze_desgin.size() && maze_desgin[new_y][new_x] != '#') {
+    if (new_y < (int)maze_desgin.size() && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = 'v'; // Player facing down
         py = new_y;
         px = new_x;
+		//add to moves taken and points
+		//todo: Check if the path is a visitied path then add points + 2
+		addMove();
+		addPoint();
+
     }
 }
 
 void Player::move_left() {
     int new_y = py;
     int new_x = px - 1;
-    if (new_x >= 0 && maze_desgin[new_y][new_x] != '#') {
+    if (new_x >= 0 && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '<'; // Player facing left
         py = new_y;
         px = new_x;
+		//add to moves taken and points
+		//todo: Check if the path is a visitied path then add points + 2
+		addMove();
+		addPoint();
+
     }
 }
 
 void Player::move_right() {
     int new_y = py;
     int new_x = px + 1;
-    if (new_x < (int)maze_desgin[0].size() && maze_desgin[new_y][new_x] != '#') {
+    if (new_x < (int)maze_desgin[0].size() && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S'){
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '>'; // Player facing right
         py = new_y;
         px = new_x;
+		//add to moves taken and points
+		//todo: Check if the path is a visitied path then add points + 2
+		addMove();
+		addPoint();
     }
 }

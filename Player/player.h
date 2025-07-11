@@ -11,17 +11,18 @@
 	-Name 
  */
 #include "../Maze/maze.h"
+#include "../Scoreboard/score.h"
 #include <string>
 #include <vector>
 using namespace std;
-class Player: public Maze{
+class Player: public Maze , public Score{
 private:
 	string name;
 	int width =0, height =0;
 	int py = 0, px = 0;
 public:
 		//Constructers
-		Player(const string& name , int width, int height);
+		Player(const string& name , int width, int height, int points, int moves);
 
 		//setters 
 		void setName(const string name);

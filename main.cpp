@@ -21,7 +21,7 @@ int main() {
     noecho();
     keypad(stdscr, TRUE);
     curs_set(1);  // Show the cursor for name input
-
+		
     // Initialize colors
     start_color();
     use_default_colors();
@@ -62,8 +62,8 @@ int main() {
     // Hide cursor after name input
     curs_set(0);
 
-    // Create player and maze
-    Player player(name, start_col + WIDTH, start_row + HEIGHT);
+    // Create player, maze and scoreboard
+    Player player(name, start_col + WIDTH, start_row + HEIGHT , 0, 0);
     player.setName(name);
 
     // Game loop
@@ -74,7 +74,13 @@ int main() {
         // Print Welcome Message
         std::string welcomeMsg = "Welcome " + player.getName() + "!";
         int msg_col = (col - (int)welcomeMsg.length()) / 2;
-        mvprintw(2, msg_col, "%s", welcomeMsg.c_str());
+        mvprintw(1, msg_col, "%s", welcomeMsg.c_str());
+
+        // Print Scoreboard
+        std::string score = "Moves: " + to_string(player.getMove()) + " Points: " + to_string(player.getPoint());
+        int score_col = (col - (int)welcomeMsg.length()) / 2;
+        mvprintw(2, msg_col, "%s", score.c_str());
+
 
         // Draw maze
         player.print_maze();
