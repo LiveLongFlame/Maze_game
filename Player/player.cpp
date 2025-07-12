@@ -55,6 +55,10 @@ void Player::start_postion(){
 void Player::move_up() {
     int new_y = py - 1;
     int new_x = px;
+	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
+		game_over = true;
+		has_won = true;
+	}
     if (new_y >= 0 && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '^'; // Player facing up
@@ -73,10 +77,14 @@ void Player::move_up() {
 
     }
 }
-
 void Player::move_down() {
     int new_y = py + 1;
     int new_x = px;
+	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
+		game_over = true;
+		has_won = true;
+	}
+
     if (new_y < (int)maze_desgin.size() && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = 'v'; // Player facing down
@@ -98,7 +106,11 @@ void Player::move_down() {
 void Player::move_left() {
     int new_y = py;
     int new_x = px - 1;
-    if (new_x >= 0 && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
+		game_over = true;
+		has_won = true;
+	}
+	if (new_x >= 0 && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '<'; // Player facing left
         py = new_y;
@@ -120,6 +132,11 @@ void Player::move_left() {
 void Player::move_right() {
     int new_y = py;
     int new_x = px + 1;
+	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
+		game_over = true;
+		has_won = true;
+	}
+
     if (new_x < (int)maze_desgin[0].size() && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S'){
         maze_desgin[py][px] = '*';  // Clear old position
         maze_desgin[new_y][new_x] = '>'; // Player facing right
@@ -137,3 +154,12 @@ void Player::move_right() {
 		player_visited_path[py][px] = true;
     }
 }
+
+bool Player::isGameOver() {
+    return game_over;
+}
+
+bool Player::didWin() {
+    return has_won;
+}
+

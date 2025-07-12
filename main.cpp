@@ -68,7 +68,7 @@ int main() {
 
     // Game loop
     int input;
-    while ((input = getch()) != 'q') {
+    while ((input = getch()) != 'q' && !player.isGameOver()) {
         clear();
 
         // Print Welcome Message
@@ -111,7 +111,15 @@ int main() {
                 break;
         }
     }
-
+	clear();
+	if (player.didWin()) {
+		mvprintw(row / 2, (col - 12) / 2, "You Win! ");
+	} else {
+		mvprintw(row / 2, (col - 16) / 2, "Game Over. ");
+	}
+	refresh();
+	getch();  // Wait for user to press a key
+	
     endwin(); // Exit ncurses mode
     return 0;
 }
