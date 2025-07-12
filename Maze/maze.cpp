@@ -138,8 +138,11 @@ void Maze::print_maze() {
 					attron(COLOR_PAIR(3));
 					mvaddch(start_y + i, start_x + j, ch);
 					attroff(COLOR_PAIR(3));
-				}
-				else {
+				}else if( ch == '*'){
+					attron(COLOR_PAIR(1));
+					mvaddch(start_y + i, start_x + j, ch);
+					attroff(COLOR_PAIR(1));
+				}else {
 					mvaddch(start_y + i, start_x + j, ch);
 				}	
 			} 
