@@ -52,6 +52,8 @@ vector<vector<char>> Maze::generate_maze(int width, int height){
     this->height = height;
 
     maze_desgin.resize(height, vector<char>(width, '#'));
+	//Each path is all false
+	player_visited_path.resize(height, vector<bool>(width, false));	
 
     std::srand(std::time(nullptr)); // Seed RNG
 

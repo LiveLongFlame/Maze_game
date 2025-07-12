@@ -4,6 +4,7 @@
  */
 
 #include "player.h"
+#include <filesystem>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -59,11 +60,16 @@ void Player::move_up() {
         maze_desgin[new_y][new_x] = '^'; // Player facing up
         py = new_y;
         px = new_x;
-
-	//add to moves taken and points
-	//todo: Check if the path is a visitied path then add points + 2
-	addMove();
-	addPoint();
+		//add to moves taken and points
+		//todo: Check if the path is a visitied path then add points + 2
+		addMove();
+		if(player_visited_path[py][px]){
+				addPoint();
+				addPoint();
+		}else{
+			addPoint();
+		}
+		player_visited_path[py][px] = true;
 
     }
 }
@@ -79,8 +85,13 @@ void Player::move_down() {
 		//add to moves taken and points
 		//todo: Check if the path is a visitied path then add points + 2
 		addMove();
-		addPoint();
-
+		if(player_visited_path[py][px]){
+			addPoint();
+			addPoint();
+		}else{
+			addPoint();
+		}
+		player_visited_path[py][px] = true;
     }
 }
 
@@ -95,7 +106,13 @@ void Player::move_left() {
 		//add to moves taken and points
 		//todo: Check if the path is a visitied path then add points + 2
 		addMove();
-		addPoint();
+		if(player_visited_path[py][px]){
+			addPoint();
+			addPoint();
+		}else{
+			addPoint();
+		}
+		player_visited_path[py][px] = true;
 
     }
 }
@@ -111,6 +128,12 @@ void Player::move_right() {
 		//add to moves taken and points
 		//todo: Check if the path is a visitied path then add points + 2
 		addMove();
-		addPoint();
+		if(player_visited_path[py][px]){
+			addPoint();
+			addPoint();
+		}else{
+			addPoint();
+		}
+		player_visited_path[py][px] = true;
     }
 }

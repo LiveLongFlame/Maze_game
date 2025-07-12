@@ -20,6 +20,7 @@ protected:
 	int start_point[2];
 	int end_point[2];
 	vector<vector<char>> maze_desgin;
+	vector<vector<bool>> player_visited_path;
 public:
 	Maze(int width, int height); 
 
