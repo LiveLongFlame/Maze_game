@@ -85,6 +85,8 @@ int main() {
         // Draw maze
         player.print_maze();
 
+	
+
         refresh();
 
         // Movement controls
@@ -117,6 +119,7 @@ int main() {
 	//todo: if the path of the algo is the same of the user then the path is green however, if its different then the path is yellow 
 	//tood: win condtion if the player and algo points == then draw else, algo < user = loose or algo > user = win 
 	clear();
+	
 	if (player.didWin()) {
 		mvprintw(row / 2, (col - 12) / 2, "You Win!");
 	} else {
