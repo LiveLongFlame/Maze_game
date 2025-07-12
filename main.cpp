@@ -113,7 +113,7 @@ int main() {
     }
 	clear();
 	if (player.didWin()) {
-		mvprintw(row / 2, (col - 12) / 2, "You Win! ");
+		mvprintw(row / 2, (col - 12) / 2, "You Win!");
 	} else {
 		mvprintw(row / 2, (col - 16) / 2, "Game Over. ");
 	}

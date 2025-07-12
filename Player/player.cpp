@@ -52,108 +52,131 @@ void Player::start_postion(){
 		px = x -1;
 	}	
 }
+
 void Player::move_up() {
     int new_y = py - 1;
     int new_x = px;
-	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
-		game_over = true;
-		has_won = true;
-	}
-    if (new_y >= 0 && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S') {
-        maze_desgin[py][px] = '*';  // Clear old position
-        maze_desgin[new_y][new_x] = '^'; // Player facing up
-        py = new_y;
-        px = new_x;
-		//add to moves taken and points
-		//todo: Check if the path is a visitied path then add points + 2
-		addMove();
-		if(player_visited_path[py][px]){
-				addPoint();
-				addPoint();
-		}else{
-			addPoint();
-		}
-		player_visited_path[py][px] = true;
 
+    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+
+        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+            game_over = true;
+            has_won = true;
+        }
+
+        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+            maze_desgin[py][px] = '*';
+            maze_desgin[new_y][new_x] = '^';
+            py = new_y;
+            px = new_x;
+            addMove();
+
+            if (player_visited_path[py][px]) {
+                addPoint();
+                addPoint();
+            } else {
+                addPoint();
+            }
+
+            player_visited_path[py][px] = true;
+        }
     }
 }
+
 void Player::move_down() {
     int new_y = py + 1;
     int new_x = px;
-	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
-		game_over = true;
-		has_won = true;
-	}
 
-    if (new_y < (int)maze_desgin.size() && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-        maze_desgin[py][px] = '*';  // Clear old position
-        maze_desgin[new_y][new_x] = 'v'; // Player facing down
-        py = new_y;
-        px = new_x;
-		//add to moves taken and points
-		//todo: Check if the path is a visitied path then add points + 2
-		addMove();
-		if(player_visited_path[py][px]){
-			addPoint();
-			addPoint();
-		}else{
-			addPoint();
-		}
-		player_visited_path[py][px] = true;
+    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+
+        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+            game_over = true;
+            has_won = true;
+        }
+
+        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+            maze_desgin[py][px] = '*';
+            maze_desgin[new_y][new_x] = 'v';
+            py = new_y;
+            px = new_x;
+            addMove();
+
+            if (player_visited_path[py][px]) {
+                addPoint();
+                addPoint();
+            } else {
+                addPoint();
+            }
+
+            player_visited_path[py][px] = true;
+        }
     }
 }
 
 void Player::move_left() {
     int new_y = py;
     int new_x = px - 1;
-	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
-		game_over = true;
-		has_won = true;
-	}
-	if (new_x >= 0 && maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-        maze_desgin[py][px] = '*';  // Clear old position
-        maze_desgin[new_y][new_x] = '<'; // Player facing left
-        py = new_y;
-        px = new_x;
-		//add to moves taken and points
-		//todo: Check if the path is a visitied path then add points + 2
-		addMove();
-		if(player_visited_path[py][px]){
-			addPoint();
-			addPoint();
-		}else{
-			addPoint();
-		}
-		player_visited_path[py][px] = true;
 
+    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+
+        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+            game_over = true;
+            has_won = true;
+        }
+
+        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+            maze_desgin[py][px] = '*';
+            maze_desgin[new_y][new_x] = '<';
+            py = new_y;
+            px = new_x;
+            addMove();
+
+            if (player_visited_path[py][px]) {
+                addPoint();
+                addPoint();
+            } else {
+                addPoint();
+            }
+
+            player_visited_path[py][px] = true;
+        }
     }
 }
 
 void Player::move_right() {
     int new_y = py;
     int new_x = px + 1;
-	if(new_y >= 0 && maze_desgin[new_y][new_x] == 'B' && !game_over){
-		game_over = true;
-		has_won = true;
-	}
 
-    if (new_x < (int)maze_desgin[0].size() && maze_desgin[new_y][new_x] != '#'  && maze_desgin[new_y][new_x] != 'S'){
-        maze_desgin[py][px] = '*';  // Clear old position
-        maze_desgin[new_y][new_x] = '>'; // Player facing right
-        py = new_y;
-        px = new_x;
-		//add to moves taken and points
-		//todo: Check if the path is a visitied path then add points + 2
-		addMove();
-		if(player_visited_path[py][px]){
-			addPoint();
-			addPoint();
-		}else{
-			addPoint();
-		}
-		player_visited_path[py][px] = true;
+    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+
+        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+            game_over = true;
+            has_won = true;
+        }
+
+        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+            maze_desgin[py][px] = '*';
+            maze_desgin[new_y][new_x] = '>';
+            py = new_y;
+            px = new_x;
+            addMove();
+
+            if (player_visited_path[py][px]) {
+                addPoint();
+                addPoint();
+            } else {
+                addPoint();
+            }
+
+            player_visited_path[py][px] = true;
+        }
     }
 }
+
 
 bool Player::isGameOver() {
     return game_over;
