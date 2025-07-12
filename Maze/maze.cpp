@@ -54,6 +54,7 @@ vector<vector<char>> Maze::generate_maze(int width, int height){
     maze_desgin.resize(height, vector<char>(width, '#'));
 	//Each path is all false
 	player_visited_path.resize(height, vector<bool>(width, false));	
+	algo_path.resize(height, vector<bool>(width, false));  // <--- Add this line
 
     std::srand(std::time(nullptr)); // Seed RNG
 
@@ -162,13 +163,14 @@ void Maze::solve_maze(string algo){
 	//3. bfs
 	//option:
 	//A* path finder
-	if(algo == "flood"){
-		flood_fill();
-	}else if(algo == "dfs"){
-		dfs();
-	}else if(algo == "bfs"){
-		bfs();
-	}
+	bfs();
+	// if(algo == "flood"){
+	// 	flood_fill();
+	// }else if(algo == "dfs"){
+	// 	dfs();
+	// }else if(algo == "bfs"){
+	// 	bfs();
+	// }
 }
 
 void Maze::flood_fill(){
@@ -176,6 +178,7 @@ void Maze::flood_fill(){
 void Maze::dfs(){
 }
 void Maze::bfs(){
+	algo_path.assign(height, vector<bool>(width, false));
 	int sx = start_point[1];
     int sy = start_point[0];
     int ex = end_point[1];
