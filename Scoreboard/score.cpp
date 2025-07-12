@@ -22,8 +22,19 @@ void Score::addMove(){
 	moves++;
 }
 
+int	Score::getPoint_algo(){
+	return algo_points;
 
+}
+int	Score::getMove_algo(){
+	return algo_moves;
+}
 
-
+void Score::addPoint_algo(){
+	algo_points++;
+}
+void Score::addMove_algo(){
+	algo_moves++;
+}
 
 

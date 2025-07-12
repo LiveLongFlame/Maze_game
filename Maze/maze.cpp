@@ -139,7 +139,7 @@ void Maze::print_maze() {
 					attron(COLOR_PAIR(3));
 					mvaddch(start_y + i, start_x + j, ch);
 					attroff(COLOR_PAIR(3));
-				}else if (algo_path[i][j]) {
+				}else if (algo_path[i][j] && algo_show) {
 					attron(COLOR_PAIR(3));
 					mvaddch(start_y + i, start_x + j, '*');
 					attroff(COLOR_PAIR(3));
@@ -156,82 +156,4 @@ void Maze::print_maze() {
     }
 }
 
-void Maze::solve_maze(string algo){
-	//todo: implement different algorithms depending on the string algo 
-	//1. flodo fill 
-	//2. dfs
-	//3. bfs
-	//option:
-	//A* path finder
-	bfs();
-	// if(algo == "flood"){
-	// 	flood_fill();
-	// }else if(algo == "dfs"){
-	// 	dfs();
-	// }else if(algo == "bfs"){
-	// 	bfs();
-	// }
-}
-
-void Maze::flood_fill(){
-}
-void Maze::dfs(){
-}
-void Maze::bfs(){
-	algo_path.assign(height, vector<bool>(width, false));
-	int sx = start_point[1];
-    int sy = start_point[0];
-    int ex = end_point[1];
-    int ey = end_point[0];
-
-    algo_path.assign(height, vector<bool>(width, false));
-    vector<vector<bool>> visited(height, vector<bool>(width, false));
-    vector<vector<pair<int, int>>> parent(height, vector<pair<int, int>>(width, {-1, -1}));
-
-    queue<pair<int, int>> q;
-    q.push({sy, sx});
-    visited[sy][sx] = true;
-
-    // Directions: up, down, left, right
-    vector<pair<int, int>> directions = {
-        {-1, 0}, {1, 0}, {0, -1}, {0, 1}
-    };
-
-    bool found = false;
-
-    while (!q.empty() && !found) {
-        auto [y, x] = q.front();
-        q.pop();
-
-        for (auto [dy, dx] : directions) {
-            int ny = y + dy;
-            int nx = x + dx;
-
-            if (ny >= 0 && ny < height && nx >= 0 && nx < width &&
-                !visited[ny][nx] && (maze_desgin[ny][nx] == ' ' || maze_desgin[ny][nx] == 'E')) {
-
-                visited[ny][nx] = true;
-                parent[ny][nx] = {y, x};
-                q.push({ny, nx});
-
-                if (ny == ey && nx == ex) {
-                    found = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    // Backtrack path from end to start
-    if (found) {
-        int cy = ey;
-        int cx = ex;
-        while (!(cy == sy && cx == sx)) {
-            algo_path[cy][cx] = true;
-            if (maze_desgin[cy][cx] == ' ') maze_desgin[cy][cx] = '*';
-            tie(cy, cx) = parent[cy][cx];
-        }
-        algo_path[sy][sx] = true;
-    }
-}
 

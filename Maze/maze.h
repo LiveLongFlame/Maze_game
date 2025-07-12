@@ -22,7 +22,7 @@ protected:
 	vector<vector<char>> maze_desgin;
 	vector<vector<bool>> player_visited_path;
 	vector<vector<bool>> algo_path;
-	
+	bool algo_show = false;	
 public:
 	Maze(int width, int height); 
 
@@ -36,13 +36,5 @@ public:
 
 	//solve maze with the specific algo 
 	void solve_maze(string algo);
-
-	//the different algorithms
-	void flood_fill();
-	void dfs();
-	void bfs();
-	//option 
-	// void A_start();
-
 };
 #endif

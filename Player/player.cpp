@@ -2,10 +2,9 @@
 	reinterpret_cast
 	Purpose: Player method file 
  */
-
+#include <queue>
+#include <map>
 #include "player.h"
-#include <filesystem>
-#include <iostream>
 #include <string>
 using namespace std;
 Player::Player(const string& name, int w, int h , int points, int moves):Maze(w, h),Score(points, moves){
@@ -190,3 +189,94 @@ bool Player::didWin() {
     return has_won;
 }
 
+void Player::solve_maze(string algo){
+	//todo: implement different algorithms depending on the string algo 
+	//2. dfs
+	//3. bfs
+	//option:
+	//A* path finder
+	if(algo == "dfs"){
+		dfs();
+	}else if(algo == "bfs"){
+		bfs();
+	}
+}
+
+void Player::dfs(){
+}
+void Player::bfs(){
+	 algo_show = true;
+
+    int rows = maze_desgin.size();
+    int cols = maze_desgin[0].size();
+    algo_path = vector<vector<bool>>(rows, vector<bool>(cols, false));
+
+    queue<pair<int, int>> q;
+    map<pair<int, int>, pair<int, int>> parent; // for path reconstruction
+    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+
+    q.push({py, px});
+    visited[py][px] = true;
+
+    int dy[] = {-1, 1, 0, 0}; // up, down, left, right
+    int dx[] = {0, 0, -1, 1};
+
+    pair<int, int> end = {-1, -1};
+
+    while (!q.empty()) {
+        auto [y, x] = q.front(); q.pop();
+
+        if (maze_desgin[y][x] == 'E') {
+            end = {y, x};
+            break;
+        }
+
+        for (int i = 0; i < 4; ++i) {
+            int ny = y + dy[i];
+            int nx = x + dx[i];
+
+            if (ny >= 0 && ny < rows && nx >= 0 && nx < cols &&
+                !visited[ny][nx] &&
+                maze_desgin[ny][nx] != '#' &&
+                maze_desgin[ny][nx] != 'S') {
+
+                visited[ny][nx] = true;
+                parent[{ny, nx}] = {y, x};
+                q.push({ny, nx});
+            }
+        }
+    }
+
+   // Reconstruct path and apply scoring logic
+    if (end.first != -1) {
+        pair<int, int> curr = end;
+        while (curr != make_pair(py, px)) {
+            int y = curr.first;
+            int x = curr.second;
+            algo_path[y][x] = true;
+
+            if (player_visited_path[y][x]) {
+                addPoint_algo(); // backtracked
+                addPoint_algo();
+            } else {
+                addMove_algo();  // newly explored
+                addPoint_algo();
+                player_visited_path[y][x] = true;
+            }
+
+            curr = parent[curr];
+        }
+
+        // Include starting position as well
+        if (player_visited_path[py][px]) {
+            addPoint_algo();
+            addPoint_algo();
+        } else {
+            addMove_algo();
+            addPoint_algo();
+            player_visited_path[py][px] = true;
+        }
+
+        algo_path[py][px] = true;
+    } 
+}

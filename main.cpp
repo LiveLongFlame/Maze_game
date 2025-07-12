@@ -103,7 +103,7 @@ int main() {
                 break;
             case KEY_LEFT:
             case 'h':
-                player.move_left();
+        player.move_left();
 				refresh();
                 break;
             case KEY_RIGHT:
@@ -118,14 +118,20 @@ int main() {
 	//todo: once the algo is selected then the user sees the algo path printed in yellow and the points the algo has at the top
 	//todo: if the path of the algo is the same of the user then the path is green however, if its different then the path is yellow 
 	//tood: win condtion if the player and algo points == then draw else, algo < user = loose or algo > user = win 
-	clear();
-	player.solve_maze("bfs");
-	player.print_maze();
+	clear(); 
 	
 	if (player.didWin()) {
 		mvprintw(row / 2, (col - 12) / 2, "You Win!");
+		player.solve_maze("bfs");
+		player.print_maze();
+		cout << "Moves: " << player.getMove() << " Points: " << player.getPoint() << '\n' << "Algo: \n Moves: " << player.getMove_algo() << " Points: " << player.getPoint_algo();	
 	} else {
 		mvprintw(row / 2, (col - 16) / 2, "Game Over. ");
+	player.solve_maze("bfs");
+		player.print_maze();
+		cout << "Moves: " << player.getMove() << " Points: " << player.getPoint() << '\n' << "Algo: \n Moves: " << player.getMove_algo() << " Points: " << player.getPoint_algo();	
+	
+
 	}
 	refresh();
 	getch();  // Wait for user to press a key
