@@ -68,6 +68,7 @@ void Player::move_up() {
         if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
             maze_desgin[py][px] = '*';
             maze_desgin[new_y][new_x] = '^';
+			print_maze();
             py = new_y;
             px = new_x;
             addMove();
@@ -99,6 +100,7 @@ void Player::move_down() {
         if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
             maze_desgin[py][px] = '*';
             maze_desgin[new_y][new_x] = 'v';
+			print_maze();
             py = new_y;
             px = new_x;
             addMove();
@@ -130,6 +132,7 @@ void Player::move_left() {
         if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
             maze_desgin[py][px] = '*';
             maze_desgin[new_y][new_x] = '<';
+			print_maze();
             py = new_y;
             px = new_x;
             addMove();
@@ -161,6 +164,7 @@ void Player::move_right() {
         if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
             maze_desgin[py][px] = '*';
             maze_desgin[new_y][new_x] = '>';
+			print_maze();
             py = new_y;
             px = new_x;
             addMove();
