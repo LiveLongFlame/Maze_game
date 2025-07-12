@@ -215,8 +215,8 @@ void Player::bfs(){
     map<pair<int, int>, pair<int, int>> parent; // for path reconstruction
     vector<vector<bool>> visited(rows, vector<bool>(cols, false));
 
-    q.push({py, px});
-    visited[py][px] = true;
+    q.push({start_point[0], start_point[1]});
+    visited[start_point[0]][start_point[1]] = true;
 
     int dy[] = {-1, 1, 0, 0}; // up, down, left, right
     int dx[] = {0, 0, -1, 1};
@@ -250,7 +250,7 @@ void Player::bfs(){
    // Reconstruct path and apply scoring logic
     if (end.first != -1) {
         pair<int, int> curr = end;
-        while (curr != make_pair(py, px)) {
+        while (curr != make_pair(start_point[0], start_point[1])) {
             int y = curr.first;
             int x = curr.second;
             algo_path[y][x] = true;

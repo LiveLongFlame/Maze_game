@@ -23,6 +23,7 @@ private:
 	bool game_win_loose = false;
 	int width =0, height =0;
 	int py = 0, px = 0;
+
 public:
 		//Constructers
 		Player(const string& name , int width, int height, int points, int moves);
