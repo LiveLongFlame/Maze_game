@@ -111,7 +111,7 @@ void Maze::print_maze() {
 				bool left  = (j > 0 && maze_desgin[i][j - 1] == '#');
 				bool right = (j < width - 1 && maze_desgin[i][j + 1] == '#');
 
-				// if ((left || right) && !(up || down))
+			// if ((left || right) && !(up || down))
 				// 	ch = '-';
 				// else if ((up || down) && !(left || right))
 				// 	ch = '|';
@@ -150,4 +150,26 @@ void Maze::print_maze() {
     }
 }
 
-void Maze::solve_maze(string algo){}
+void Maze::solve_maze(string algo){
+	//todo: implement different algorithms depending on the string algo 
+	//1. flodo fill 
+	//2. dfs
+	//3. bfs
+	//option:
+	//A* path finder
+	if(algo == "flood"){
+		flood_fill();
+	}else if(algo == "dfs"){
+		dfs();
+	}else if(algo == "bfs"){
+		bfs();
+	}
+}
+
+void Maze::flood_fill(){
+}
+void Maze::dfs(){
+}
+void Maze::bfs(){
+}
+
