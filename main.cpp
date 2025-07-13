@@ -68,7 +68,7 @@ int main() {
 
 	// Game loop
 	int input;
-	while ((input = getch()) != 'q' && !player.isGameOver()) {
+	while ((input = getch()) != 'q') {
 		clear();
 
 		// Print Welcome Message
@@ -84,8 +84,6 @@ int main() {
 
 		// Draw maze
 		player.print_maze();
-
-
 
 		refresh();
 
@@ -112,17 +110,20 @@ int main() {
 				refresh();
 				break;
 		}
+
+		//if the game end
+		if(player.isGameOver()){
+			mvprintw(0, 0, "Algo:\nMove: %d Points: %d", player.getMove_algo(), player.getPoint_algo());
+			refresh();
+			getch();
+			break;
+
+		}	
+
 	}
 	//tood: win condtion if the player and algo points == then draw else, algo < user = loose or algo > user = win 
-	clear(); 
 	//ERROR: when in the game if the player finds the exsit the bfs path wont show however if  a path is created and hit 'q' then the bfs path shows	
-	player.solve_maze("bfs");
-	player.print_maze();
-	cout << "Algo: \n";
-	cout << "Move: " << player.getMove_algo() << " Points: " << player.getPoint_algo();
-	refresh();
-	getch();  // Wait for user to press a key
-
+	// If player won, show BFS path
 	endwin(); // Exit ncurses mode
 	return 0;
 }

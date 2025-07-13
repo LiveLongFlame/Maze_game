@@ -60,6 +60,8 @@ void Player::move_up() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+			 solve_maze("bfs"); // Add this
+			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -92,6 +94,8 @@ void Player::move_down() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+			 solve_maze("bfs"); // Add this
+			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -124,6 +128,8 @@ void Player::move_left() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+			 solve_maze("bfs"); // Add this
+			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -156,6 +162,8 @@ void Player::move_right() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+			 solve_maze("bfs"); // Add this
+			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -248,6 +256,7 @@ void Player::bfs(){
     }
 
    // Reconstruct path and apply scoring logic
+   // error: got to fix the point system as it is not adding up correctring
     if (end.first != -1) {
         pair<int, int> curr = end;
         while (curr != make_pair(start_point[0], start_point[1])) {
