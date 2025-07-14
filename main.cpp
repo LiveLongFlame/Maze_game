@@ -14,7 +14,9 @@ enum maze_info {
 	WIDTH = 30,
 	HEIGHT = 5
 };
-
+void choose_algo(){
+	//chooses a side menu on the side and moves the maze and prints maze more to the left so the menu can appear and thus, allows the user to choose what algo they want to show
+}
 int main() {
 	initscr();
 	cbreak();
@@ -68,7 +70,7 @@ int main() {
 
 	// Game loop
 	int input;
-	while ((input = getch()) != 'q') {
+	while ((input = getch()) != 'q' && !player.isGameOver()) {
 		clear();
 
 		// Print Welcome Message
@@ -110,20 +112,19 @@ int main() {
 				refresh();
 				break;
 		}
-
+	//todo: Create menu where users can pick an algorithm and what algorithm they pick will show the algorithms path and points/moves it took for the algorithm so solve., 
+	choose_algo();
+	}
 		//if the game end
 		if(player.isGameOver()){
 			mvprintw(0, 0, "Algo:\nMove: %d Points: %d", player.getMove_algo(), player.getPoint_algo());
 			refresh();
 			getch();
-			break;
 
 		}	
 
-	}
+
 	//tood: win condtion if the player and algo points == then draw else, algo < user = loose or algo > user = win 
-	//ERROR: when in the game if the player finds the exsit the bfs path wont show however if  a path is created and hit 'q' then the bfs path shows	
-	// If player won, show BFS path
-	endwin(); // Exit ncurses mode
+	endwin(); 
 	return 0;
 }
