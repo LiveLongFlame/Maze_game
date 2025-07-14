@@ -163,7 +163,7 @@ int main() {
 
 	// Game loop
 	int input;
-	while ((input = getch()) != 'q' && !player.isGameOver() ) {
+	while ((input = getch()) != 'q' ) {
 		clear();
 
 		// Print Welcome Message
@@ -205,11 +205,18 @@ int main() {
 				refresh();
 				break;
 		}
+		if(player.isGameOver()){
+			// Flush one last frame after move ends game
+        clear();
+        player.print_maze(); // To show player reaching end
+        refresh();
+        napms(500); // Short pause so user sees win
+        break;
+		}
 	}
-		//todo: Create menu where users can pick an algorithm and what algorithm they pick will show the algorithms path and points/moves it took for the algorithm so solve., 
-		//if the game end
-			choose_algo(player);
-			refresh();
+	//Error: ONCE THE PLAYER GOES CHANGE DOES THE MAZE AND DOES IT THE ALGORITHM DOESNT SHOW. HOWEVER IF I JUST QUIT THEN THE ALGORITHM SHOWS if the game end 
+	choose_algo(player);
+	refresh();
 	endwin(); 
 	return 0;
 }
