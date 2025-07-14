@@ -121,9 +121,9 @@ void Maze::print_maze() {
 
 				// Prioritize color logic
 				if (ch == '>' || ch == '<' || ch == '^' || ch == 'v') {
-					attron(COLOR_PAIR(1));
+					attron(COLOR_PAIR(4));
 					mvaddch(start_y + i, start_x + j, ch);
-					attroff(COLOR_PAIR(1));
+					attroff(COLOR_PAIR(4));
 				}
 				else if (ch == 'E') {
 					attron(COLOR_PAIR(2));

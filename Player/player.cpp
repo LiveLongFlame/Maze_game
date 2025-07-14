@@ -2,6 +2,7 @@
 	reinterpret_cast
 	Purpose: Player method file 
  */
+#include <ncurses.h>
 #include <queue>
 #include <map>
 #include "player.h"
@@ -60,8 +61,6 @@ void Player::move_up() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-			 solve_maze("bfs"); // Add this
-			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -94,8 +93,6 @@ void Player::move_down() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-			 solve_maze("bfs"); // Add this
-			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -128,8 +125,6 @@ void Player::move_left() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-			 solve_maze("bfs"); // Add this
-			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -162,8 +157,6 @@ void Player::move_right() {
         new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
         if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-			 solve_maze("bfs"); // Add this
-			 print_maze();
             game_over = true;
             has_won = true;
         }
@@ -208,6 +201,9 @@ void Player::solve_maze(string algo){
 	}else if(algo == "bfs"){
 		bfs();
 	}
+	refresh();
+	algo_show = true;
+	print_maze();
 }
 
 void Player::dfs(){
