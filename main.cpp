@@ -55,7 +55,6 @@ void choose_algo(Player& player) {
         }
     }
 
-
     // Run selected algorithm
     if (selected == 0) {
         player.solve_maze("bfs");
@@ -65,17 +64,48 @@ void choose_algo(Player& player) {
         player.solve_maze("astar");
     }
 
-    // Show maze with algorithm path
     clear();
     player.print_maze();
-	//todo: move algo and player moves and points into the middle of the screen
-	//todo: then when the player presses anykey it will show who won the game
-	//todo: the winner is who ever has the least amount of points
-	//else if == then print out draw
-    mvprintw(1, 0, "Algorithm: %s", options[selected].c_str());
-    mvprintw(2, 0, "Algo - Moves: %d  Points: %d", player.getMove_algo(), player.getPoint_algo());
-    mvprintw(3, 0, "Player - Moves: %d  Points: %d", player.getMove(), player.getPoint());
-    mvprintw(5, 0, "Press any key to return to game...");
+
+    // Get terminal size for centering
+    int term_row, term_col;
+    getmaxyx(stdscr, term_row, term_col);
+
+    int player_moves = player.getMove();
+    int player_points = player.getPoint();
+    int algo_moves = player.getMove_algo();
+    int algo_points = player.getPoint_algo();
+
+    std::string algo_name = options[selected];
+    std::string line1 = "Algorithm: " + algo_name;
+    std::string line2 = "Algorithm - Moves: " + std::to_string(algo_moves) + "  Points: " + std::to_string(algo_points);
+    std::string line3 = "Player    - Moves: " + std::to_string(player_moves) + "  Points: " + std::to_string(player_points);
+    std::string line4 = "Press any key to continue...";
+	attron(COLOR_PAIR(2));
+    mvprintw(term_row / 2 - 2, (term_col - line1.size()) / 2, "%s", line1.c_str());
+    mvprintw(term_row / 2 - 1, (term_col - line2.size()) / 2, "%s", line2.c_str());
+    mvprintw(term_row / 2 + 0, (term_col - line3.size()) / 2, "%s", line3.c_str());
+    mvprintw(term_row / 2 + 2, (term_col - line4.size()) / 2, "%s", line4.c_str());
+	attroff(COLOR_PAIR(2));
+    refresh();
+    getch();
+
+    // Determine winner
+    std::string result;
+    if (player_points < algo_points && player.isGameOver()) {
+        result = "You Win! ";
+    } else if (player_points > algo_points && player.isGameOver()) {
+        result = "Algorithm Wins!";
+    } else if(player_points == algo_points && player.isGameOver()){
+        result = "It's a Draw!";
+    } else{
+		result = "YOU LOOSE";
+	}
+
+    clear();
+    std::string winner_line = "Result: " + result;
+    mvprintw(term_row / 2, (term_col - winner_line.size()) / 2, "%s", winner_line.c_str());
+    mvprintw(term_row / 2 + 2, (term_col - 28) / 2, "Press any key to countinue...");
     refresh();
     getch();
 }
@@ -180,12 +210,6 @@ int main() {
 		//if the game end
 			choose_algo(player);
 			refresh();
-			getch();
-
-		
-
-
-	//tood: win condtion if the player and algo points == then draw else, algo < user = loose or algo > user = win 
 	endwin(); 
 	return 0;
 }
