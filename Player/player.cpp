@@ -54,131 +54,190 @@ void Player::start_postion(){
 }
 
 void Player::move_up() {
-    int new_y = py - 1;
-    int new_x = px;
+	int new_y = py - 1;
+	int new_x = px;
 
-    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
-        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+	if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
-        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-            game_over = true;
-            has_won = true;
-        }
+		// Check if next tile is walkable and not 'S' (start)
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
 
-        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-            maze_desgin[py][px] = '*';
-            maze_desgin[new_y][new_x] = '^';
+			// Mark previous position
+			maze_desgin[py][px] = '*';
+
+			// Move player
+			py = new_y;
+			px = new_x;
+
+			// Check for end after moving
+			if (maze_desgin[py][px] == 'E' && !game_over) {
+				game_over = true;
+				has_won = true;
+			}
+
+			// Mark new position
+			maze_desgin[py][px] = '^';
+
+			// Print maze after move
 			print_maze();
-            py = new_y;
-            px = new_x;
-            addMove();
 
-            if (player_visited_path[py][px]) {
-                addPoint();
-                addPoint();
-            } else {
-                addPoint();
-            }
+			// Add move count
+			addMove();
 
-            player_visited_path[py][px] = true;
-        }
-    }
+			// Add points based on visited status
+			if (player_visited_path[py][px]) {
+				addPoint();  // Already visited — less points?
+			} else {
+				addPoint();  // First visit
+				addPoint();  // Bonus for first time
+			}
+
+			// Mark this tile as visited
+			player_visited_path[py][px] = true;
+		}
+	}
+
 }
 
 void Player::move_down() {
-    int new_y = py + 1;
-    int new_x = px;
+	int new_y = py + 1;
+	int new_x = px;
+	if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
-    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
-        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+		// Check if next tile is walkable and not 'S' (start)
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
 
-        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-            game_over = true;
-            has_won = true;
-        }
+			// Mark previous position
+			maze_desgin[py][px] = '*';
 
-        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-            maze_desgin[py][px] = '*';
-            maze_desgin[new_y][new_x] = 'v';
+			// Move player
+			py = new_y;
+			px = new_x;
+
+			// Check for end after moving
+			if (maze_desgin[py][px] == 'E' && !game_over) {
+				game_over = true;
+				has_won = true;
+			}
+
+			// Mark new position
+			maze_desgin[py][px] = 'v';
+
+			// Print maze after move
 			print_maze();
-            py = new_y;
-            px = new_x;
-            addMove();
 
-            if (player_visited_path[py][px]) {
-                addPoint();
-                addPoint();
-            } else {
-                addPoint();
-            }
+			// Add move count
+			addMove();
 
-            player_visited_path[py][px] = true;
-        }
-    }
+			// Add points based on visited status
+			if (player_visited_path[py][px]) {
+				addPoint();  // Already visited — less points?
+			} else {
+				addPoint();  // First visit
+				addPoint();  // Bonus for first time
+			}
+
+			// Mark this tile as visited
+			player_visited_path[py][px] = true;
+		}
+	}
+
 }
 
 void Player::move_left() {
-    int new_y = py;
-    int new_x = px - 1;
+	int new_y = py;
+	int new_x = px - 1;
 
-    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
-        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+	if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
-        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-            game_over = true;
-            has_won = true;
-        }
+		// Check if next tile is walkable and not 'S' (start)
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
 
-        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-            maze_desgin[py][px] = '*';
-            maze_desgin[new_y][new_x] = '<';
+			// Mark previous position
+			maze_desgin[py][px] = '*';
+
+			// Move player
+			py = new_y;
+			px = new_x;
+
+			// Check for end after moving
+			if (maze_desgin[py][px] == 'E' && !game_over) {
+				game_over = true;
+				has_won = true;
+			}
+
+			// Mark new position
+			maze_desgin[py][px] = '<';
+
+			// Print maze after move
 			print_maze();
-            py = new_y;
-            px = new_x;
-            addMove();
 
-            if (player_visited_path[py][px]) {
-                addPoint();
-                addPoint();
-            } else {
-                addPoint();
-            }
+			// Add move count
+			addMove();
 
-            player_visited_path[py][px] = true;
-        }
+			// Add points based on visited status
+			if (player_visited_path[py][px]) {
+				addPoint();  // Already visited — less points?
+			} else {
+				addPoint();  // First visit
+				addPoint();  // Bonus for first time
+			}
+
+        // Mark this tile as visited
+        player_visited_path[py][px] = true;
     }
+}
+ 
 }
 
 void Player::move_right() {
-    int new_y = py;
-    int new_x = px + 1;
+	int new_y = py;
+	int new_x = px + 1;
 
-    if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
-        new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
+	if (new_y >= 0 && new_y < (int)maze_desgin.size() &&
+			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
-        if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
-            game_over = true;
-            has_won = true;
-        }
+		// Check if next tile is walkable and not 'S' (start)
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
 
-        if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
-            maze_desgin[py][px] = '*';
-            maze_desgin[new_y][new_x] = '>';
+			// Mark previous position
+			maze_desgin[py][px] = '*';
+
+			// Move player
+			py = new_y;
+			px = new_x;
+
+			// Check for end after moving
+			if (maze_desgin[py][px] == 'E' && !game_over) {
+				game_over = true;
+				has_won = true;
+			}
+
+			// Mark new position
+			maze_desgin[py][px] = '>';
+
+			// Print maze after move
 			print_maze();
-            py = new_y;
-            px = new_x;
-            addMove();
 
-            if (player_visited_path[py][px]) {
-                addPoint();
-                addPoint();
-            } else {
-                addPoint();
-            }
+			// Add move count
+			addMove();
 
-            player_visited_path[py][px] = true;
-        }
-    }
+			// Add points based on visited status
+			if (player_visited_path[py][px]) {
+				addPoint();  // Already visited — less points?
+			} else {
+				addPoint();  // First visit
+				addPoint();  // Bonus for first time
+			}
+
+			// Mark this tile as visited
+			player_visited_path[py][px] = true;
+		}
+	}
+
 }
 
 

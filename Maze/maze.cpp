@@ -103,6 +103,7 @@ vector<vector<char>> Maze::generate_maze(int width, int height) {
 }
 // This methods prints the maze
 void Maze::print_maze() {
+	refresh();
 	int term_rows, term_cols;
 	getmaxyx(stdscr, term_rows, term_cols); // Terminal height and width
 

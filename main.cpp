@@ -20,7 +20,6 @@ void choose_algo(Player& player) {
     std::vector<std::string> options = {
         "Breadth-First Search (BFS)",
         "Depth-First Search (DFS)",
-        "A* Search"
     };
 
     int selected = 0;
@@ -60,8 +59,6 @@ void choose_algo(Player& player) {
         player.solve_maze("bfs");
     } else if (selected == 1) {
         player.solve_maze("dfs");
-    } else if (selected == 2) {
-        player.solve_maze("astar");
     }
 
     clear();
@@ -206,11 +203,7 @@ int main() {
 				break;
 		}
 		if(player.isGameOver()){
-			// Flush one last frame after move ends game
-        clear();
-        player.print_maze(); // To show player reaching end
         refresh();
-        napms(500); // Short pause so user sees win
         break;
 		}
 	}
