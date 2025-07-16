@@ -207,7 +207,6 @@ int main() {
         break;
 		}
 	}
-	//Error: ONCE THE PLAYER GOES CHANGE DOES THE MAZE AND DOES IT THE ALGORITHM DOESNT SHOW. HOWEVER IF I JUST QUIT THEN THE ALGORITHM SHOWS if the game end 
 	choose_algo(player);
 	refresh();
 	endwin(); 

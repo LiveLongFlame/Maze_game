@@ -83,9 +83,9 @@ void Player::move_up() {
 			// Add points based on visited status
 			if (player_visited_path[py][px]) {
 				addPoint();  // Already visited — less points?
+				addPoint();  // Bonus for first time
 			} else {
 				addPoint();  // First visit
-				addPoint();  // Bonus for first time
 			}
 
 			// Mark this tile as visited
@@ -130,8 +130,8 @@ void Player::move_down() {
 			// Add points based on visited status
 			if (player_visited_path[py][px]) {
 				addPoint();  // Already visited — less points?
-			} else {
 				addPoint();  // First visit
+			} else {
 				addPoint();  // Bonus for first time
 			}
 
@@ -178,8 +178,8 @@ void Player::move_left() {
 			// Add points based on visited status
 			if (player_visited_path[py][px]) {
 				addPoint();  // Already visited — less points?
-			} else {
 				addPoint();  // First visit
+			} else {
 				addPoint();  // Bonus for first time
 			}
 
@@ -226,8 +226,8 @@ void Player::move_right() {
 			// Add points based on visited status
 			if (player_visited_path[py][px]) {
 				addPoint();  // Already visited — less points?
-			} else {
 				addPoint();  // First visit
+			} else {
 				addPoint();  // Bonus for first time
 			}
 
@@ -270,8 +270,8 @@ void Player::solve_maze(string algo){
 
 void Player::dfs(){
 }
-void Player::bfs(){
-	 algo_show = true;
+void Player::bfs() {
+    algo_show = true;
 
     int rows = maze_desgin.size();
     int cols = maze_desgin[0].size();
@@ -313,37 +313,40 @@ void Player::bfs(){
         }
     }
 
-   // Reconstruct path and apply scoring logic
-   // error: got to fix the point system as it is not adding up correctring
+    // Reconstruct path and apply scoring logic
     if (end.first != -1) {
         pair<int, int> curr = end;
+
         while (curr != make_pair(start_point[0], start_point[1])) {
             int y = curr.first;
             int x = curr.second;
             algo_path[y][x] = true;
 
+            // If player already visited this tile
             if (player_visited_path[y][x]) {
-                addPoint_algo(); // backtracked
-                addPoint_algo();
+                addPoint_algo(); // backtrack bonus
+                addPoint_algo(); // total +2
             } else {
-                addMove_algo();  // newly explored
-                addPoint_algo();
+                addMove_algo();  // first visit
+                addPoint_algo(); // +1
                 player_visited_path[y][x] = true;
             }
 
             curr = parent[curr];
         }
 
-        // Include starting position as well
-        if (player_visited_path[py][px]) {
-            addPoint_algo();
+        // Include the actual start point (player entry)
+        int sy = start_point[0];
+        int sx = start_point[1];
+        algo_path[sy][sx] = true;
+
+        if (player_visited_path[sy][sx]) {
+            addPoint_algo(); // backtrack
             addPoint_algo();
         } else {
             addMove_algo();
             addPoint_algo();
-            player_visited_path[py][px] = true;
+            player_visited_path[sy][sx] = true;
         }
-
-        algo_path[py][px] = true;
-    } 
+    }
 }
