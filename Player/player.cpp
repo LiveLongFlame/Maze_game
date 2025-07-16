@@ -1,4 +1,4 @@
-/* 
+/* plaeyr
 	reinterpret_cast
 	Purpose: Player method file 
  */
@@ -61,7 +61,7 @@ void Player::move_up() {
 			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
 		// Check if next tile is walkable and not 'S' (start)
-		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S' && maze_desgin[new_y][new_x] != 'E') {
 
 			// Mark previous position
 			maze_desgin[py][px] = '*';
@@ -70,11 +70,6 @@ void Player::move_up() {
 			py = new_y;
 			px = new_x;
 
-			// Check for end after moving
-			if (maze_desgin[py][px] == 'E' && !game_over) {
-				game_over = true;
-				has_won = true;
-			}
 
 			// Mark new position
 			maze_desgin[py][px] = '^';
@@ -96,6 +91,11 @@ void Player::move_up() {
 			// Mark this tile as visited
 			player_visited_path[py][px] = true;
 		}
+		// Check for end after moving
+		if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+			game_over = true;
+			has_won = true;
+		}
 	}
 
 }
@@ -107,7 +107,7 @@ void Player::move_down() {
 			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
 		// Check if next tile is walkable and not 'S' (start)
-		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S' && maze_desgin[new_y][new_x] != 'E') {
 
 			// Mark previous position
 			maze_desgin[py][px] = '*';
@@ -117,10 +117,6 @@ void Player::move_down() {
 			px = new_x;
 
 			// Check for end after moving
-			if (maze_desgin[py][px] == 'E' && !game_over) {
-				game_over = true;
-				has_won = true;
-			}
 
 			// Mark new position
 			maze_desgin[py][px] = 'v';
@@ -143,6 +139,11 @@ void Player::move_down() {
 			player_visited_path[py][px] = true;
 		}
 	}
+	if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+		game_over = true;
+		has_won = true;
+	}
+
 
 }
 
@@ -154,7 +155,7 @@ void Player::move_left() {
 			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
 		// Check if next tile is walkable and not 'S' (start)
-		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S' && maze_desgin[new_y][new_x] != 'E') {
 
 			// Mark previous position
 			maze_desgin[py][px] = '*';
@@ -164,10 +165,6 @@ void Player::move_left() {
 			px = new_x;
 
 			// Check for end after moving
-			if (maze_desgin[py][px] == 'E' && !game_over) {
-				game_over = true;
-				has_won = true;
-			}
 
 			// Mark new position
 			maze_desgin[py][px] = '<';
@@ -190,6 +187,11 @@ void Player::move_left() {
         player_visited_path[py][px] = true;
     }
 }
+if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+	game_over = true;
+	has_won = true;
+}
+
  
 }
 
@@ -201,7 +203,7 @@ void Player::move_right() {
 			new_x >= 0 && new_x < (int)maze_desgin[0].size()) {
 
 		// Check if next tile is walkable and not 'S' (start)
-		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S') {
+		if (maze_desgin[new_y][new_x] != '#' && maze_desgin[new_y][new_x] != 'S' && maze_desgin[new_y][new_x] != 'E') {
 
 			// Mark previous position
 			maze_desgin[py][px] = '*';
@@ -211,10 +213,6 @@ void Player::move_right() {
 			px = new_x;
 
 			// Check for end after moving
-			if (maze_desgin[py][px] == 'E' && !game_over) {
-				game_over = true;
-				has_won = true;
-			}
 
 			// Mark new position
 			maze_desgin[py][px] = '>';
@@ -237,6 +235,11 @@ void Player::move_right() {
 			player_visited_path[py][px] = true;
 		}
 	}
+	if (maze_desgin[new_y][new_x] == 'E' && !game_over) {
+		game_over = true;
+		has_won = true;
+	}
+
 
 }
 
