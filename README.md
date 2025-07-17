@@ -1,3 +1,4 @@
+![Image](https://github.com/user-attachments/assets/f4dcad1d-0b87-4943-bada-9e681b6fe8ab)
 # Maze_game
 Always Wondered who is better humans or computers... Well now it's time to show off your skills. Are you able to beat Computer solving a maze in the least amount of moves
 
